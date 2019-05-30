@@ -1,0 +1,140 @@
+{
+  "name": "01_modulate_finetune_x4_ksize5_bicx3_nonorm_denoise_resnet_DIV2K"
+  , "suffix": null
+  , "model": "sr"
+  , "scale": 1
+  , "crop_scale": 3
+  , "gpu_ids": [0]
+//  , "adabn": true
+
+  , "datasets": {
+    "test": { // the 1st test dataset
+      "name": "test_set5_x36_mod18"
+      , "mode": "LRHR"
+      , "dataroot_HR": "/media/hjw/jwhe/BasicSR_v2/data/val/Set5_val/mod18/Set5_mod18"
+      , "dataroot_LR": "/media/hjw/jwhe/BasicSR_v2/data/val/Set5_val/mod18/Set5_bicx36"
+    }
+
+//     "test": {
+//      "name": "val_LIVE1_JEPG50",
+//      "mode": "LRHR",
+//      "dataroot_HR": "/media/hjw/jwhe/BasicSR_v2/data/val/LIVE1_val/LIVE1_mod",
+//      "dataroot_LR": "/media/hjw/jwhe/BasicSR_v2/data/val/LIVE1_val/LIVE1_jpg50"
+//    }
+
+//      "test": { // the 1st test dataset
+//      "name": "test_set5_gray_x3_mod3"
+//      , "mode": "LRHR"
+//      , "dataroot_HR": "/media/sdc/jwhe/BasicSR_v2/data/val/Set5_val/mod3/Set5_gray_mod3"
+//      , "dataroot_LR": "/media/sdc/jwhe/BasicSR_v2/data/val/Set5_val/mod3/Set5_gray_bicx3"
+//    }
+//
+//    "test": {
+//      "name": "val_LIVE1_gray_JEPG10",
+//      "mode": "LRHR",
+//      "dataroot_HR": "/media/sdc/jwhe/BasicSR_v2/data/val/LIVE1_val/LIVE1_gray_mod",
+//      "dataroot_LR": "/media/sdc/jwhe/BasicSR_v2/data/val/LIVE1_val/LIVE1_gray_jpg10"
+//    }
+////
+//     "test_2": {
+//      "name": "val_Classic5_gray_JEPG10",
+//      "mode": "LRHR",
+//      "dataroot_HR": "/media/sdc/jwhe/BasicSR_v2/data/val/Classic5_val/classic5_mod",
+//      "dataroot_LR": "/media/sdc/jwhe/BasicSR_v2/data/val/Classic5_val/classic5_jpg10"
+//    }
+//    "test": {
+//      "name": "val_CBSD68_Gaussian60",
+//      "mode": "LRHR",
+//      "dataroot_HR": "/media/hjw/jwhe/BasicSR_v2/data/CBSD68/mod2/CBSD68_mod",
+//      "dataroot_LR": "/media/hjw/jwhe/BasicSR_v2/data/CBSD68/mod2/CBSD68_Gaussian60"
+//    }
+//
+//      ,"test_2": { // the 2st test dataset
+//      "name": "test_set14_x34_mod34"
+//      , "mode": "LRHR"
+//      , "dataroot_HR": "/media/sdc/jwhe/BasicSR_v2/data/val/Set14_val/mod34/Set14_mod34"
+//      , "dataroot_LR": "/media/sdc/jwhe/BasicSR_v2/data/val/Set14_val/mod34/Set14_bicx34"
+//    }
+//////
+//    , "test_3": { // the 3st test dataset
+//      "name": "test_BSD100_x2_mod2"
+//      , "mode": "LRHR"
+//      , "dataroot_HR": "/media/sdc/jwhe/BasicSR_v2/data/val/BSD100_val/mod2/BSD100_mod2"
+//      , "dataroot_LR": "/media/sdc/jwhe/BasicSR_v2/data/val/BSD100_val/mod2/BSD100_bicx2"
+//    }
+//    , "test_3": { // the 3st test dataset
+//      "name": "test_Set12_noise15"
+//      , "mode": "LRHR"
+//      , "dataroot_HR": "/media/sdc/jwhe/BasicSR_v2/data/val/Set12_val/Set12_rgb_mod"
+//      , "dataroot_LR": "/media/sdc/jwhe/BasicSR_v2/data/val/Set12_val/Set12_rgb_noise15"
+//    }
+////
+//       ,"test_4": { // the 3st test dataset
+//      "name": "test_DIV2K100_x4_mod4"
+//      , "mode": "LRHR"
+//      , "dataroot_HR": "/media/sdc/jwhe/BasicSR_v2/data/val/DIV2K_val/mod4/DIV2K100_mod4"
+//      , "dataroot_LR": "/media/sdc/jwhe/BasicSR_v2/data/val/DIV2K_val/mod4/DIV2K100_bicx4"
+//    }
+
+//         "test_4": { // the 3st test dataset
+//      "name": "test_DIV2K100_mod2_jpg20"
+//      , "mode": "LRHR"
+//      , "dataroot_HR": "/media/sdc/jwhe/BasicSR_v2/data/val/DIV2K_val/mod2/DIV2K100_one_mod2"
+//      , "dataroot_LR": "/media/sdc/jwhe/BasicSR_v2/data/val/DIV2K_val/mod2/DIV2K100_one_jpg20"
+//    }
+  }
+
+  , "path": {
+    "root": "/media/hjw/jwhe/BasicSR_v3/finetune_sr_v2"
+    , "finetune_model": "../finetune_sr_v2/experiments/finetune_x4_ksize5_bicx3_nonorm_denoise_resnet_DIV2K/models/537000_G.pth"
+//    , "basic_model": "../switch_noise/experiments/finetune_50_ksize1_finetune_30_ksize1_01_gaussian15_nonorm_denoise_resnet_DIV2K/models/108000_G.pth"
+  }
+
+  , "network_G": {
+    "which_model_G": "denoise_resnet" // RRDB_net | sr_resnet
+    , "norm_type": "adaptive_conv_res"
+//    , "norm_type": null
+    , "mode": "CNA"
+    , "nf": 64
+    , "nb": 16
+    , "in_nc": 3
+    , "out_nc": 3
+//    , "gc": 32
+    , "group": 1
+    , "down_scale": 2
+    , "ada_ksize": 5
+//    , "fea_norm": "adaptive_conv_res"
+//    , "upsample_norm": "adaptive_conv_res"
+  }
+
+
+//   , "network_G": {
+//    "which_model_G": "cond_denoise_resnet" // RRDB_net | sr_resnet
+//    , "norm_type": "cond_adaptive_conv_res"
+////    , "norm_type": "cond_transform_res"
+////    , "norm_type": "cond_instance"
+////    , "norm_type": "interp_adaptive_conv_res"
+////    , "norm_type": null
+//    , "nf": 64
+//    , "nb": 16
+//    , "in_nc": 3
+//    , "out_nc": 3
+////    , "gc": 32
+//    , "group": 1
+//    , "down_scale": 2
+////    , "ada_ksize": 5
+//    , "num_classes": 2
+////    , "fea_norm": "adaptive_conv_res"
+////    , "upsample_norm": "adaptive_conv_res"
+//  }
+
+//   , "network_G": {
+//    "which_model_G": "srcnn" // RRDB_net | sr_resnet
+////    , "norm_type": "adaptive_conv_res"
+//    , "norm_type": null
+//    , "mode": "CNA"
+//    , "nf": 64
+//    , "in_nc": 1
+//    , "out_nc": 1
+//  }
+}

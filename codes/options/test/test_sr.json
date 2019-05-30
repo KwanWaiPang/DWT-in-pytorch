@@ -1,0 +1,221 @@
+{
+  "name": "test_finetune_basic_srx4_sigma_c16s06_subnet_DIV2K"
+  , "suffix": null
+  , "model": "sr_sub" // sr_sub | sr
+  , "scale": 4
+  , "crop_scale": 4
+  , "gpu_ids": [0]
+//  , "adabn": true
+
+  , "datasets": {
+//    "test1": { // the 1st test dataset
+//      "name": "test_set5_x4_mod4"
+//      , "mode": "LRHR"
+//      , "dataroot_HR": "/media/sdc/jwhe/BasicSR_v2/data/val/Set5_val/mod4/Set5_mod4"
+//      , "dataroot_LR": "/media/sdc/jwhe/BasicSR_v2/data/val/Set5_val/mod4/Set5_bicx4"
+//    }
+//
+//     "test2": { // the 1st test dataset
+//        "name": "test_set5_x3_mod6"
+//        , "mode": "LRHR"
+//        , "dataroot_HR": "/media/sdc/jwhe/BasicSR_v2/data/val/Set5_val/mod6/Set5_mod6"
+//        , "dataroot_LR": "/media/sdc/jwhe/BasicSR_v2/data/val/Set5_val/mod6/Set5_bicx3"
+//      }
+
+//      "test": { // the 1st test dataset
+//      "name": "test_set5_gray_x3_mod3"
+//      , "mode": "LRHR"
+//      , "dataroot_HR": "/media/sdc/jwhe/BasicSR_v2/data/val/Set5_val/mod3/Set5_gray_mod3"
+//      , "dataroot_LR": "/media/sdc/jwhe/BasicSR_v2/data/val/Set5_val/mod3/Set5_gray_bicx3"
+//    }
+//
+//    "test": {
+//      "name": "val_LIVE1_gray_JEPG30",
+//      "mode": "LRHR",
+//      "dataroot_HR": "/media/hjw/jwhe/BasicSR_v2/data/val/LIVE1_val/LIVE1_gray_mod",
+//      "dataroot_LR": "/media/hjw/jwhe/BasicSR_v2/data/val/LIVE1_val/LIVE1_gray_jpg30"
+//    }
+
+//   "test": {
+//      "name": "val_LIVE1_JEPG80",
+//      "mode": "LRHR",
+//      "dataroot_HR": "/media/hjw/jwhe/BasicSR_v2/data/val/LIVE1_val/LIVE1_mod",
+//      "dataroot_LR": "/media/hjw/jwhe/BasicSR_v2/data/val/LIVE1_val/LIVE1_jpg80"
+//    }
+
+//    "test1": {
+//      "name": "val_LIVE1_LQ_JEPG10",
+//      "mode": "LRHR",
+//      "dataroot_HR": "/media/hjw/jwhe/BasicSR_v2/data/val/LIVE1_val/LIVE1_mod",
+//      "dataroot_LR": "/media/hjw/jwhe/BasicSR_v2/data/val/LIVE1_val/LIVE1_jpg10"
+//    }
+//
+//    ,"test2": {
+//      "name": "val_LIVE1_HQ_JEPG80",
+//      "mode": "LRHR",
+//      "dataroot_HR": "/media/hjw/jwhe/BasicSR_v2/data/val/LIVE1_val/LIVE1_mod",
+//      "dataroot_LR": "/media/hjw/jwhe/BasicSR_v2/data/val/LIVE1_val/LIVE1_jpg80"
+//    }
+////
+//     "test_2": {
+//      "name": "val_Classic5_gray_JEPG10",
+//      "mode": "LRHR",
+//      "dataroot_HR": "/media/sdc/jwhe/BasicSR_v2/data/val/Classic5_val/classic5_mod",
+//      "dataroot_LR": "/media/sdc/jwhe/BasicSR_v2/data/val/Classic5_val/classic5_jpg10"
+//    }
+
+    "test": {
+      "name": "val_set5_x4_c03s04_mod4",
+      "mode": "LRHR",
+      "dataroot_HR": "/home/jwhe/workspace/BasicSR_v3/data/val/Set5_val/mod4/Set5_mod4",
+//      "dataroot_HR": "/home/jwhe/workspace/BasicSR_v3/data/val/Set5_val/mod4/Set5_bicLRx4",
+      "dataroot_LR": "/home/jwhe/workspace/BasicSR_v3/data/val/Set5_val/mod4/Set5_bicLRx4_c03s04"
+    }
+
+//    "test": {
+//      "name": "val_CBSD68_Gaussian25",
+//      "mode": "LRHR",
+//      "dataroot_HR": "~/workspace/BasicSR_v3/data/CBSD68/mod2/CBSD68_mod",
+//      "dataroot_LR": "~/workspace/BasicSR_v3/data/CBSD68/mod2/CBSD68_Gaussian25"
+////      , "noise_gt": true
+//    }
+
+//      , "test_2": { // the 2st test dataset
+//      "name": "test_set14_x36_mod18"
+//      , "mode": "LRHR"
+//      , "dataroot_HR": "/media/sdc/jwhe/BasicSR_v2/data/val/Set14_val/mod18/Set14_mod18"
+//      , "dataroot_LR": "/media/sdc/jwhe/BasicSR_v2/data/val/Set14_val/mod18/Set14_bicx36"
+//    }
+////
+
+//    , "test_3": { // the 3st test dataset
+//      "name": "test_Set12_noise15"
+//      , "mode": "LRHR"
+//      , "dataroot_HR": "/media/sdc/jwhe/BasicSR_v2/data/val/Set12_val/Set12_rgb_mod"
+//      , "dataroot_LR": "/media/sdc/jwhe/BasicSR_v2/data/val/Set12_val/Set12_rgb_noise15"
+//    }
+////
+//       ,"test_4": { // the 3st test dataset
+//      "name": "test_DIV2K100_x4_mod4"
+//      , "mode": "LRHR"
+//      , "dataroot_HR": "/media/sdc/jwhe/BasicSR_v2/data/val/DIV2K_val/mod4/DIV2K100_mod4"
+//      , "dataroot_LR": "/media/sdc/jwhe/BasicSR_v2/data/val/DIV2K_val/mod4/DIV2K100_bicx4"
+//    }
+  }
+
+  , "path": {
+    "root": "~/workspace/BasicSR_v3/sr_c16s06"
+//    , "pretrain_model_G": "../experiments/pretrained_models/jpeg10to40_models/adabn/01_JPEG80_batch_denoise_resnet_DIV2K/adabn_restore_490000.pth"
+//    , "pretrain_model_G": "../sr_c16s06/experiments/LR_srx4_c16s06_resnet_denoise_DIV2K/models/704000_G.pth"
+//    , "pretrain_model_G": "../sr_c16s06/experiments/finetune_sft_gate_False_LR_srx4_c16s06_resnet_denoise_DIV2K/models/265000_G.pth"
+//, "pretrain_model_sub": "../noise_c16s06/experiments/sigma_c16s06_subnet_DIV2K/models/306000_G.pth"
+//  , "pretrain_model_sub": "../sr_c16s06/experiments/finetune_sft_gate_False_LR_srx4_c16s06_resnet_denoise_DIV2K/models/265000_sub.pth"
+  , "pretrain_model_G": "../sr_c16s06/experiments/finetune_basic_srx4_sigma_c16s06_subnet_DIV2K/models/948000_G.pth"
+  , "pretrain_model_sub": "../sr_c16s06/experiments/finetune_basic_srx4_sigma_c16s06_subnet_DIV2K/models/948000_sub.pth"
+}
+
+
+//    , "network_G": {
+//    "which_model_G": "modulate_sr_resnet" // RRDB_net | sr_resnet | modulate_sr_resnet
+////    , "norm_type": "adaptive_conv_res"
+//    , "norm_type": "sft"
+////    , "norm_type": null
+//    , "mode": "CNA"
+//    , "nf": 64
+//    , "nb": 16
+//    , "in_nc": 3
+//    , "out_nc": 3
+////    , "gc": 32
+//    , "group": 1
+//    , "gate_conv_bias": false
+//  }
+
+    , "network_sub": {
+    "which_model_sub": "noise_subnet" // RRDB_net | sr_resnet | modulate_denoise_resnet |noise_subnet
+//    , "norm_type": "adaptive_conv_res"
+    , "norm_type": "batch"
+    , "mode": "CNA"
+    , "nf": 64
+//    , "nb": 16
+    , "in_nc": 3
+    , "out_nc": 3
+    , "group": 1
+  }
+
+  , "network_G": {
+    "which_model_G": "sr_resnet" // cond_denoise_resnet; denoise_resnet
+//    , "norm_type": "adaptive_conv_res"
+//    , "norm_type": "cond_instance"
+    , "norm_type": null
+    , "mode": "CNA"
+    , "nf": 64
+    , "nb": 16
+    , "in_nc": 6
+    , "out_nc": 3
+//    , "gc": 32
+    , "group": 1
+//    , "down_scale": 2
+//    , "num_classes": 2
+//    , "ada_ksize": 3
+//    , "fea_norm": "adaptive_conv_res"
+//    , "upsample_norm": "adaptive_conv_res"
+  }
+
+//    , "network_G": {
+//    "which_model_G": "noise_subnet" // RRDB_net | sr_resnet | modulate_denoise_resnet |noise_subnet
+////    , "norm_type": "adaptive_conv_res"
+//    , "norm_type": "batch"
+//    , "mode": "CNA"
+//    , "nf": 64
+////    , "nb": 16
+//    , "in_nc": 3
+//    , "out_nc": 3
+//    , "group": 1
+//  }
+
+//  , "network_G": {
+//    "which_model_G": "modulate_denoise_resnet" // RRDB_net | sr_resnet
+////    , "norm_type": "adaptive_conv_res"
+//    , "norm_type": "sft"
+//    , "mode": "CNA"
+//    , "nf": 64
+//    , "nb": 16
+//    , "in_nc": 3
+//    , "out_nc": 3
+////    , "gc": 32
+//    , "group": 1
+//    , "gate_conv_bias": true
+////    , "ada_ksize": 1
+////    , "num_classes": 2
+////    , "fea_norm": "adaptive_conv_res"
+////    , "upsample_norm": "adaptive_conv_res"
+//  }
+
+//  , "network_G": {
+//    "which_model_G": "noise_subnet" // RRDB_net | sr_resnet | modulate_denoise_resnet
+////    , "norm_type": "adaptive_conv_res"
+//    , "norm_type": "batch"
+//    , "mode": "CNA"
+//    , "nf": 64
+//    , "nb": 16
+//    , "in_nc": 3
+//    , "out_nc": 3
+////    , "gc": 32
+//    , "group": 1
+////    , "gate_conv_bias": true
+////    , "ada_ksize": 1
+////    , "num_classes": 2
+////    , "fea_norm": "adaptive_conv_res"
+////    , "upsample_norm": "adaptive_conv_res"
+//  }
+
+//   , "network_G": {
+//    "which_model_G": "srcnn" // RRDB_net | sr_resnet
+////    , "norm_type": "adaptive_conv_res"
+//    , "norm_type": null
+//    , "mode": "CNA"
+//    , "nf": 64
+//    , "in_nc": 1
+//    , "out_nc": 1
+//  }
+}

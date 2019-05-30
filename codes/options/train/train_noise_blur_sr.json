@@ -1,0 +1,121 @@
+{
+  "name": "debug" //  please remove "debug_" during training
+  , "tb_logger_dir": "sr_noise_blur"
+  , "use_tb_logger": true
+  , "model":"sr_noise_blur"
+  , "scale": 4
+  , "crop_scale": 4
+  , "gpu_ids": [2,3]
+//  , "init_type": "kaiming"
+//
+//  , "finetune_type": "basic" //sft | basic
+
+  , "datasets": {
+    "train": {
+      "name": "DIV2K"
+      , "mode": "LRMRMATHR"
+      , "dataroot_HR": "/home/jwhe/workspace/BasicSR_v3/data/DIV2K/DIV2K800_sub"
+      , "dataroot_MR": "/home/jwhe/workspace/BasicSR_v3/data/DIV2K/DIV2K800_noise_blur_x4_LR/DIV2K800_MR_random"
+      , "dataroot_LR": "/home/jwhe/workspace/BasicSR_v3/data/DIV2K/DIV2K800_noise_blur_x4_LR/DIV2K800_LR_random"
+      , "dataroot_MAT": "/home/jwhe/workspace/BasicSR_v3/data/DIV2K/DIV2K800_noise_blur_x4_LR/DIV2K800_MAT_random"
+      , "subset_file": null
+      , "use_shuffle": true
+      , "n_workers": 8
+      , "batch_size": 24 // 16
+      , "HR_size": 128 // 128 | 192 | 96
+      , "noise_gt": true
+      , "use_flip": true
+      , "use_rot": true
+    }
+
+  , "val": {
+      "name": "val_set5_x4_c03s08_mod4",
+      "mode": "LRHR",
+      "dataroot_HR": "/home/jwhe/workspace/BasicSR_v3/data/val/Set5_val/mod4/Set5_mod4",
+      "dataroot_LR": "/home/jwhe/workspace/BasicSR_v3/data/val/Set5_val/mod4/Set5_bicLRx4_c03s08"
+    }
+
+  }
+
+  , "path": {
+    "root": "/home/jwhe/workspace/BasicSR_v3/sr_noise_blur"
+//    , "pretrain_model_G": null
+//    , "pretrain_model_sub_noise": null
+//    , "pretrain_model_sub_blur": null
+  }
+
+  , "network_G": {
+    "which_model_G": "sr_resnet" // sr_resnet | modulate_sr_resnet
+//    , "norm_type": "sft"
+    , "norm_type": null
+    , "mode": "CNA"
+    , "nf": 64
+    , "nb": 16
+    , "in_nc": 9
+    , "out_nc": 3
+//    , "gc": 32
+    , "group": 1
+//    , "gate_conv_bias": true
+  }
+
+////
+  , "network_sub": {
+    "which_model_sub": "noise_subnet" // sr_resnet |noise_subnet
+//    , "norm_type": "adaptive_conv_res"
+    , "norm_type": "batch"
+//    , "norm_type": null
+    , "mode": "CNA"
+    , "nf": 64
+//    , "nb": 16
+    , "in_nc": 3
+    , "out_nc": 3
+    , "group": 1
+//    , "down_scale": 2
+  }
+
+  , "network_sub2": {
+    "which_model_sub": "blur_subnet" // sr_resnet | blur_subnet
+//    , "norm_type": "adaptive_conv_res"
+    , "norm_type": "batch"
+//    , "norm_type": null
+    , "mode": "CNA"
+    , "nf": 64
+//    , "nb": 16
+    , "in_nc": 6
+    , "out_nc": 3
+    , "group": 1
+//    , "down_scale": 2
+  }
+
+
+  , "train": {
+//    "lr_G": 1e-3
+    "lr_G": 1e-4
+    , "lr_scheme": "MultiStepLR"
+//    , "lr_steps": [200000, 400000, 600000, 800000]
+    , "lr_steps": [500000]
+//    , "lr_steps": [600000]
+//    , "lr_steps": [1000000]
+    , "lr_gamma": 0.1
+//    , "lr_gamma": 0.5
+
+    , "pixel_criterion_basic": "l2"
+    , "pixel_criterion_noise": "l2"
+    , "pixel_criterion_reg_noise": "tv"
+    , "pixel_criterion_blur": "l2"
+    , "pixel_criterion_reg_blur": "tv"
+    , "pixel_weight_basic": 1.0
+    , "pixel_weight_noise": 1.0
+    , "pixel_weight_blur": 1.0
+    , "val_freq": 2e3
+
+    , "manual_seed": 0
+    , "niter": 1e6
+//    , "niter": 6e5
+  }
+
+  , "logger": {
+    "print_freq": 200
+    , "save_checkpoint_freq": 2e3
+  }
+}

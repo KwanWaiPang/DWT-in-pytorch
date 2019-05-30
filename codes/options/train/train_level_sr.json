@@ -1,0 +1,269 @@
+{
+  "name": "correction_continual_times_noise_estimation_from0to80_plain_net" //  please remove "debug_" during training
+  , "use_tb_logger": true
+  , "model":"sr"
+  , "scale": 1
+  , "crop_scale": 0
+  , "gpu_ids": [0, 1]
+//  , "init_type": "kaiming"
+//
+//  , "finetune_type": "sft" // sft | norm
+//  , "init_norm_type": "zero"
+
+  , "datasets": {
+    "train": {
+      "name": "DIV2K"
+      , "mode": "LRHR"
+//      , "mode": "HR"
+//      , "mode": "LRMAT"
+      , "dataroot_HR": "/home/jwhe/workspace/BasicSR_v3/data/DIV2K/DIV2K800_sub"
+      , "dataroot_LR": "/home/jwhe/workspace/BasicSR_v3/data/DIV2K/DIV2K800_sub"
+      , "subset_file": null
+      , "use_shuffle": true
+      , "n_workers": 8
+      , "batch_size": 16 // 16 | 24
+      , "HR_size": 96 // 128 | 192 | 96
+//      , "noise_gt": true
+      , "use_flip": true
+      , "use_rot": true
+    }
+
+  , "val_noise75": {
+      "name": "val_CBSD68_Gaussian75",
+      "mode": "LR",
+      "dataroot_LR": "/home/jwhe/workspace/BasicSR_v3/data/CBSD68/mod2/CBSD68_Gaussian75"
+    }
+
+   , "val_noise15": {
+      "name": "val_CBSD68_Gaussian15",
+      "mode": "LR",
+      "dataroot_LR": "/home/jwhe/workspace/BasicSR_v3/data/CBSD68/mod2/CBSD68_Gaussian15"
+    }
+
+    , "val_noise50": {
+      "name": "val_CBSD68_Gaussian50",
+      "mode": "LR",
+      "dataroot_LR": "/home/jwhe/workspace/BasicSR_v3/data/CBSD68/mod2/CBSD68_Gaussian50"
+    }
+//    , "val_noise75": {
+//      "name": "val_CBSD68_Gaussian75",
+//      "mode": "LRHR",
+//      "dataroot_HR": "/home/jwhe/workspace/BasicSR_v3/data/CBSD68/mod2/CBSD68_mod",
+//      "dataroot_LR": "/home/jwhe/workspace/BasicSR_v3/data/CBSD68/mod2/CBSD68_Gaussian75"
+//      "dataroot_LR": "/home/jwhe/workspace/BasicSR_v3/data/CBSD68/mod2/CBSD68_mod"
+//      , "noise_gt": true
+//    }
+//  , "val_noise50": {
+//      "name": "val_CBSD68_Gaussian50",
+//      "mode": "LRHR",
+//      "dataroot_HR": "/home/jwhe/workspace/BasicSR_v3/data/CBSD68/mod2/CBSD68_mod",
+//      "dataroot_LR": "/home/jwhe/workspace/BasicSR_v3/data/CBSD68/mod2/CBSD68_Gaussian45"
+//      "dataroot_LR": "/home/jwhe/workspace/BasicSR_v3/data/CBSD68/mod2/CBSD68_mod"
+//      , "noise_gt": true
+//    }
+
+//  , "val_noise15": {
+//      "name": "val_CBSD68_Gaussian15",
+//      "mode": "LRHR",
+//      "dataroot_HR": "/home/jwhe/workspace/BasicSR_v3/data/CBSD68/mod2/CBSD68_mod",
+//      "dataroot_LR": "/home/jwhe/workspace/BasicSR_v3/data/CBSD68/mod2/CBSD68_Gaussian45"
+//      "dataroot_LR": "/home/jwhe/workspace/BasicSR_v3/data/CBSD68/mod2/CBSD68_mod"
+//      , "noise_gt": true
+//    }
+//
+
+//      , "val_noise45": {
+//      "name": "val_set5_x4_noise45_mod4",
+//      "mode": "LRHR",
+//      "dataroot_HR": "/home/jwhe/workspace/BasicSR_v3/data/val/Set5_val/mod4/Set5_mod4",
+//      "dataroot_LR": "/home/jwhe/workspace/BasicSR_v3/data/val/Set5_val/mod4/Set5_bicLRx4_noise45"
+//    }
+
+//   , "val_noise75": {
+//      "name": "val_set5_x4_noise75_mod4",
+//      "mode": "LRHR",
+//      "dataroot_HR": "/home/jwhe/workspace/BasicSR_v3/data/val/Set5_val/mod4/Set5_mod4",
+//      "dataroot_LR": "/home/jwhe/workspace/BasicSR_v3/data/val/Set5_val/mod4/Set5_bicLRx4_noise75"
+//    }
+
+//   , "val": {
+//      "name": "val_CBSD68_s08_c03",
+//      "mode": "LRHR",
+//      "dataroot_HR": "/home/jwhe/workspace/BasicSR_v3/data/CBSD68/mod2/CBSD68_mod",
+//      "dataroot_LR": "/home/jwhe/workspace/BasicSR_v3/data/CBSD68/mod2/CBSD68_s08_c03"
+//      , "noise_gt": true
+//    }
+
+//  , "val": {
+//      "name": "val_CBSD68_clean",
+//      "mode": "LRHR",
+//      "dataroot_HR": "/media/sdc/jwhe/BasicSR_v2/data/CBSD68/mod2/CBSD68_mod",
+//      "dataroot_LR": "/media/sdc/jwhe/BasicSR_v2/data/CBSD68/mod2/CBSD68_mod"
+//    }
+
+//    , "val": {
+//      "name": "val_LIVE1_gray_JEPG10",
+//      "mode": "LRHR",
+//      "dataroot_HR": "/media/hjw/jwhe/BasicSR_v2/data/val/LIVE1_val/LIVE1_gray_mod",
+//      "dataroot_LR": "/media/hjw/jwhe/BasicSR_v2/data/val/LIVE1_val/LIVE1_gray_jpg10"
+//    }
+
+//      , "val": {
+//      "name": "val_LIVE1_JEPG80",
+//      "mode": "LRHR",
+//      "dataroot_HR": "/media/hjw/jwhe/BasicSR_v2/data/val/LIVE1_val/LIVE1_mod",
+//      "dataroot_LR": "/media/hjw/jwhe/BasicSR_v2/data/val/LIVE1_val/LIVE1_jpg80"
+//    }
+
+//    , "val_2": {
+//      "name": "val_Classic5_gray_JEPG30",
+//      "mode": "LRHR",
+//      "dataroot_HR": "/media/sdc/jwhe/BasicSR_v2/data/val/Classic5_val/classic5_mod",
+//      "dataroot_LR": "/media/sdc/jwhe/BasicSR_v2/data/val/Classic5_val/classic5_jpg30"
+//    }
+
+//    , "val": {
+//      "name": "val_BSD68_gray_Gaussian50",
+//      "mode": "LRHR",
+//      "dataroot_HR": "/media/sdc/jwhe/BasicSR_v2/data/BSD68/mod2/BSD68_mod",
+//      "dataroot_LR": "/media/sdc/jwhe/BasicSR_v2/data/BSD68/mod2/BSD68_gray_Gaussian50"
+//    }
+
+//    , "val": {
+//      "name": "val_set5_x4_gray_mod4"
+//      , "mode": "LRHR"
+//      , "dataroot_HR": "/media/sdc/jwhe/BasicSR_v2/data/val/Set5_val/mod4/Set5_gray_mod4"
+//      , "dataroot_LR": "/media/sdc/jwhe/BasicSR_v2/data/val/Set5_val/mod4/Set5_gray_bicx4"
+//    }
+
+//    , "val": {
+//      "name": "val_set5_x4_blur_mod4"
+//      , "mode": "LRHR"
+//      , "dataroot_HR": "/home/jwhe/workspace/BasicSR_v3/data/val/Set5_val/mod4/Set5_mod4"
+//      , "dataroot_LR": "/home/jwhe/workspace/BasicSR_v3/data/val/Set5_val/mod4/Set5_theta45_l1_5_l2_3_bicx4"
+//    }
+//
+//      , "val": {
+//      "name": "val_set5_blur_width4_mod2"
+//      , "mode": "LRHR"
+//      , "dataroot_HR": "/home/jwhe/workspace/BasicSR_v3/data/val/Set5_val/mod2/Set5_mod2"
+//      , "dataroot_LR": "/home/jwhe/workspace/BasicSR_v3/data/val/Set5_val/mod2/Set5_blur_width4"
+//    }
+
+//     , "val": {
+//      "name": "val_set5_blur_width4_mod2"
+//      , "mode": "LRHR"
+////      , "mode": "LRMAT"
+//      , "dataroot_HR": "/home/jwhe/workspace/BasicSR_v3/data/val/Set5_val/mod2/Set5_blur_width4_cov_mat_v2"
+//      , "dataroot_LR": "/home/jwhe/workspace/BasicSR_v3/data/val/Set5_val/mod2/Set5_blur_width4_v2"
+//    }
+
+//  , "val": {
+//      "name": "val_set5_x4_noise0803_theta45_l1_5_l2_3_mod4",
+//      "mode": "LRHR",
+//      "dataroot_HR": "/home/jwhe/workspace/BasicSR_v3/data/val/Set5_val/mod4/Set5_mod4",
+//      "dataroot_LR": "/home/jwhe/workspace/BasicSR_v3/data/val/Set5_val/mod4/Set5_noise0803_theta45_l1_5_l2_3_bicx4"
+//    }
+//
+//    , "val": {
+//      "name": "val_set5_x4_noise15_mod4",
+//      "mode": "LRHR",
+//      "dataroot_HR": "/home/jwhe/workspace/BasicSR_v3/data/val/Set5_val/mod4/Set5_mod4",
+//      "dataroot_LR": "/home/jwhe/workspace/BasicSR_v3/data/val/Set5_val/mod4/Set5_bicLRx4_noise15"
+//    }
+
+//   , "val": {
+//      "name": "val_set5_x4_noise15_LR_mod4",
+//      "mode": "LRHR",
+//      "dataroot_HR": "/home/jwhe/workspace/BasicSR_v3/data/val/Set5_val/mod4/Set5_mod4",
+//      "dataroot_LR": "/home/jwhe/workspace/BasicSR_v3/data/val/Set5_val/mod4/Set5_bicLRx4_noise15"
+//    }
+
+//  , "val": {
+//      "name": "val_set5_x4_c03s08_LR_mod4",
+//      "mode": "LRHR",
+//      "dataroot_HR": "/home/jwhe/workspace/BasicSR_v3/data/val/Set5_val/mod4/Set5_mod4",
+//      "dataroot_LR": "/home/jwhe/workspace/BasicSR_v3/data/val/Set5_val/mod4/Set5_bicLRx4_c03s08"
+//    }
+
+//  , "val": {
+//      "name": "val_set5_c03s08_LR_mod4"
+//      , "mode": "LRHR"
+//      , "dataroot_HR": "/home/jwhe/workspace/BasicSR_v3/data/val/Set5_val/mod4/Set5_bicLRx4"
+//      , "dataroot_LR": "/home/jwhe/workspace/BasicSR_v3/data/val/Set5_val/mod4/Set5_bicLRx4_c03s08"
+//      , "noise_gt": true
+//    }
+
+
+//    , "val": {
+//      "name": "val_set5_x4_mod4"
+//      , "mode": "LRHR"
+//      , "dataroot_HR": "/home/jwhe/workspace/BasicSR_v3/data/val/Set5_val/mod4/Set5_mod4"
+//      , "dataroot_LR": "/home/jwhe/workspace/BasicSR_v3/data/val/Set5_val/mod4/Set5_bicx4"
+//    }
+//
+//    , "val": {
+//      "name": "val_set5_x3_gray_mod6"
+//      , "mode": "LRHR"
+//      , "dataroot_HR": "/media/sdc/jwhe/BasicSR_v2/data/val/Set5_val/mod6/Set5_gray_mod6"
+//      , "dataroot_LR": "/media/sdc/jwhe/BasicSR_v2/data/val/Set5_val/mod6/Set5_gray_bicx3"
+//    }
+  }
+
+  , "path": {
+    "root": "/home/jwhe/workspace/BasicSR_v3/ICCV/level"
+    , "pretrain_model_G": null
+//    , "pretrain_model_G": "../ICCV/single/pretrain_model/Gaussian15_basicmodel/sft_978000_G.pth"
+//    , "pretrain_model_G": "/home/jwhe/workspace/BasicSR_v3/ICCV/single/pretrain_model/srx4_noise_15_basicmodel/sft_530000_G.pth"
+  }
+
+  , "network_G": {
+    "which_model_G": "noise_plainnet"
+  //  noise_resnet | modulate_denoise_resnet | sr_resnet | denoise_resnet | modulate_sr_resnet
+  // noise_plainnet
+//    , "norm_type": "adaptive_conv_res"
+    , "norm_type": null
+//    , "norm_type": "sft"
+    , "mode": "CNA"
+    , "nf": 64
+//    , "nb": 16
+    , "in_nc": 3
+    , "out_nc": 1
+//    , "gc": 32
+    , "group": 1
+//    , "down_scale": 2
+//    , "gate_conv_bias": false
+//
+  }
+
+
+  , "train": {
+//    "lr_G": 1e-3
+    "lr_G": 1e-4
+    , "lr_scheme": "MultiStepLR"
+//    , "lr_steps": [200000, 400000, 600000, 800000]
+//    , "lr_steps": [500000]
+//    , "lr_steps": [600000]
+    , "lr_steps": [1000000]
+//    , "lr_steps": [50000, 100000, 200000, 400000]
+//    , "lr_steps": [100000, 200000, 300000, 400000]
+    , "lr_gamma": 0.1
+//    , "lr_gamma": 0.5
+
+    , "pixel_criterion": "l2"
+
+//    , "pixel_criterion_reg": "tv"
+
+    , "pixel_weight": 1.0
+    , "val_freq": 2e3
+
+    , "manual_seed": 0
+    , "niter": 1e6
+//    , "niter": 6e5
+  }
+
+  , "logger": {
+    "print_freq": 200
+    , "save_checkpoint_freq": 2e3
+  }
+}
